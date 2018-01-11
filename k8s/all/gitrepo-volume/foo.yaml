@@ -19,7 +19,7 @@ metadata:
     name: foo
 spec:
   containers:
-  - image: index.tenxcloud.com/tenxcloud/golang
+  - image: golang
     name: foo
     command: ["go", "run", "goweb.go"]
     workingDir: "/home/foo/golang-sample"
