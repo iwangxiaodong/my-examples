@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: foo
+spec:
+  type: NodePort
+  ports:
+  - port: 8080
+    targetPort: 8080
+    nodePort: 30080
+  selector: 
+    name: foo
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: foo
+  labels:
+    name: foo
+spec:
+  containers:
+  - image: index.tenxcloud.com/tenxcloud/golang
+    name: foo
+    command: ["go", "run", "goweb.go"]
+    workingDir: "/home/foo/golang-sample"
+    volumeMounts:
+    - mountPath: /home/foo
+      name: git-volume
+  volumes:
+  - name: git-volume
+    gitRepo:
+      repository: "https://github.com/tenxcloud/golang-sample.git"
+      revision: "master"
