@@ -3,11 +3,9 @@ kind: Service
 metadata:
   name: foo
 spec:
-  type: NodePort
   ports:
   - port: 8080
     targetPort: 8080
-    nodePort: 30080
   selector: 
     name: foo
 ---
@@ -19,7 +17,7 @@ metadata:
     name: foo
 spec:
   containers:
-  - image: golang
+  - image: golang:alpine
     name: foo
     command: ["go", "run", "goweb.go"]
     workingDir: "/home/foo/golang-sample"
