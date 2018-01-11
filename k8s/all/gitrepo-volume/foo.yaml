@@ -26,6 +26,9 @@ spec:
     volumeMounts:
     - mountPath: /home/foo
       name: git-volume
+    resources:
+      requests:
+        cpu: 200m
   volumes:
   - name: git-volume
     gitRepo:
