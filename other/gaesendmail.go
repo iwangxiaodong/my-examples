@@ -9,24 +9,19 @@ import (
 )
 
 func main() {
-	//	https://project-123456.appspot.com/mail/send?to=123456@qq.com&subject=hi&body=bye
+	//	https://project-123.appspot.com/mail/send?to=123@qq.com&subject=hi&body=bye
 	http.HandleFunc("/mail/send", sendMail)
 	appengine.Main()
 }
 
-//	App Engine>设置>电子邮件发件人>添加：sender@gmail.com
+//	App Engine>设置>电子邮件发件人>添加：当前谷歌云账号邮箱
 func sendMail(w http.ResponseWriter, r *http.Request) {
 
-	if err := r.ParseForm(); err != nil {
-		fmt.Fprintln(w, err.Error())
-		return
-	}
-
-	to := r.Form.Get("to")
-	subject := r.Form.Get("subject")
-	body := r.Form.Get("body")
+	to := r.FormValue("to")
+	subject := r.FormValue("subject")
+	body := r.FormValue("body")
 	msg := &mail.Message{
-		Sender:  "sender@gmail.com",
+		Sender:  "123@gmail.com",
 		To:      []string{to},
 		Subject: subject,
 		Body:    body,
