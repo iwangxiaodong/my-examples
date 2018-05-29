@@ -17,4 +17,7 @@ cd src-master/examples/androidapp
 wget https://raw.githubusercontent.com/iwangxiaodong/my-examples/master/webrtc/apprtc/build.gradle
 
 
+use android studio open or direct gradle build
+
+
 注意：为避免显式申请权限暂用targetSdkVersion 22
