@@ -17,31 +17,18 @@ var f = function (req, resp) {
   var timestamp = Math.floor(Date.now() / 1000) + time_to_live
   var turn_username = timestamp + ':ninefingers'
   var password = hmac(key, turn_username)
-  
-  resp.header("Access-Control-Allow-Origin", "*")
 
   return resp.send({
-    "lifetimeDuration": "86400s",
-    "iceServers": [
+    iceServers: [
       {
-        "urls": [
-          "stun:108.177.98.127:19302",
-          "stun:[2607:F8B0:400E:C06::7F]:19302"
-        ]
-      },
-      {
-        "urls": [
-          "turn:173.194.202.127:19305?transport=udp",
-          "turn:[2607:F8B0:400E:C06::7F]:19305?transport=udp",
-          "turn:173.194.202.127:19305?transport=tcp",
-          "turn:[2607:F8B0:400E:C06::7F]:19305?transport=tcp"
+        urls: [
+          'stun:ICE_SERVER_ADDR:3478',
+          'turn:ICE_SERVER_ADDR:3478'
         ],
-        "username": "CO+Uz9gFEgZIZx7cKRMYzc/s6OMTIICjBQ",
-        "credential": "j/qS8db5h+/6WrjZ0x/bGaWgBxA="
+        username: turn_username,
+        credential: password
       }
-    ],
-    "blockStatus": "NOT_BLOCKED",
-    "iceTransportPolicy": "all"
+    ]
   })
 }
 
