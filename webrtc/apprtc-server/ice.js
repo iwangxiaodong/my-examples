@@ -23,10 +23,16 @@ var f = function (req, resp) {
   return resp.send({
     iceServers: [
       {
-        urls: [
-          'stun:stun1.l.google.com:19302',
-          'turn:ICE_SERVER_ADDR:3478'
+        "urls": [
+          "stun:108.177.98.127:19302",
+          "stun:[2607:F8B0:400E:C06::7F]:19302"
         ]
+      },
+      {
+        "urls": [
+          "turn:181727444%40qq.com@numb.viagenie.ca"
+        ],
+        "credential": "wxd.1985"
       }
     ]
   })
