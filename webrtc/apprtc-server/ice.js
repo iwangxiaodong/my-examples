@@ -21,7 +21,8 @@ var f = function (req, resp) {
   resp.header("Access-Control-Allow-Origin", "*")
 
   return resp.send({
-    iceServers: [
+    "lifetimeDuration": "86400s",
+    "iceServers": [
       {
         "urls": [
           "stun:108.177.98.127:19302",
@@ -30,11 +31,17 @@ var f = function (req, resp) {
       },
       {
         "urls": [
-          "turn:181727444%40qq.com@numb.viagenie.ca"
+          "turn:173.194.202.127:19305?transport=udp",
+          "turn:[2607:F8B0:400E:C06::7F]:19305?transport=udp",
+          "turn:173.194.202.127:19305?transport=tcp",
+          "turn:[2607:F8B0:400E:C06::7F]:19305?transport=tcp"
         ],
-        "credential": "wxd.1985"
+        "username": "CO+Uz9gFEgZIZx7cKRMYzc/s6OMTIICjBQ",
+        "credential": "j/qS8db5h+/6WrjZ0x/bGaWgBxA="
       }
-    ]
+    ],
+    "blockStatus": "NOT_BLOCKED",
+    "iceTransportPolicy": "all"
   })
 }
 
