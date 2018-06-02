@@ -21,3 +21,11 @@ use android studio open or direct gradle build
 
 
 注意：为避免显式申请权限暂用targetSdkVersion 22
+
+
+    Android应用若报Handshake failed，可暂时信任所有证书：
+        if (connection instanceof HttpsURLConnection) {
+            HttpsURLConnection httpsConn = (HttpsURLConnection) connection;
+            httpsConn.setSSLSocketFactory(SSLCertificateSocketFactory.getInsecure(0, null));
+            httpsConn.setHostnameVerifier(new AllowAllHostnameVerifier());
+        }
