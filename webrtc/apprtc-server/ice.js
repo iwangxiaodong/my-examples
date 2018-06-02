@@ -17,6 +17,8 @@ var f = function (req, resp) {
   var timestamp = Math.floor(Date.now() / 1000) + time_to_live
   var turn_username = timestamp + ':ninefingers'
   var password = hmac(key, turn_username)
+  
+  resp.header("Access-Control-Allow-Origin", "*")
 
   return resp.send({
     iceServers: [
