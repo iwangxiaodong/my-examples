@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"path/filepath"
 	"strings"
 )
 
@@ -21,10 +22,10 @@ func main() {
 func genDefaultPageSourceFile(sourceFilePath string) {
 
 	//os.RemoveAll(sourceFilePath + "/generated.go")
-
-	b, _ := PathExists(sourceFilePath)
+	fulllFilePath := filepath.Join("/go/src/func/", sourceFilePath)
+	b, _ := PathExists(fulllFilePath)
 	if !b {
-		fmt.Println("根应用不存在" + sourceFilePath)
+		fmt.Println("文件不存在" + fulllFilePath)
 		return
 	}
 
@@ -35,7 +36,7 @@ func genDefaultPageSourceFile(sourceFilePath string) {
 		return
 	}
 
-	f, err := ioutil.ReadFile(sourceFilePath)
+	f, err := ioutil.ReadFile(fulllFilePath)
 	if err != nil {
 		fmt.Println(err.Error())
 		return
