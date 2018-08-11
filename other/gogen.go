@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
-	"path/filepath"
 	"strings"
 )
 
@@ -23,20 +22,20 @@ func genDefaultPageSourceFile(sourceFilePath string) {
 
 	//os.RemoveAll(sourceFilePath + "/generated.go")
 
-	b, _ := PathExists(filepath.Join(sourceFilePath, "/index.html"))
+	b, _ := PathExists(sourceFilePath)
 	if !b {
-		fmt.Println("根应用不存在index.html")
+		fmt.Println("根应用不存在" + sourceFilePath)
 		return
 	}
 
 	//	判断编程语言!!!	后续通过func.yaml的runtime来判断
-	b1, _ := PathExists(filepath.Join(sourceFilePath, "/func.go"))
+	b1, _ := PathExists("/go/src/func/func.go")
 	if !b1 {
 		fmt.Println("只支持go编程语言自动生成默认首页！")
 		return
 	}
 
-	f, err := ioutil.ReadFile(filepath.Join(sourceFilePath, "/index.html"))
+	f, err := ioutil.ReadFile(sourceFilePath)
 	if err != nil {
 		fmt.Println(err.Error())
 		return
@@ -50,7 +49,7 @@ func genDefaultPageSourceFile(sourceFilePath string) {
 
 	var data = []byte(sourceCode)
 
-	err2 := ioutil.WriteFile(filepath.Join(sourceFilePath, "/generated.go"), data, 0666)
+	err2 := ioutil.WriteFile("/go/src/func/generated.go", data, 0666)
 	if err2 != nil {
 		fmt.Printf("%s", err2)
 	}
