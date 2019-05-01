@@ -1,0 +1,34 @@
+#   vim demo.yaml
+#   kubectl apply -f demo.yaml
+#   kubectl delete Gateway demo-vs
+#   kubectl delete VirtualService demo-vs
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: demo-gateway
+spec:
+  selector:
+    istio: ingressgateway # use istio default controller
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: demo-vs
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - demo-gateway
+  http:
+  - route:
+    - destination:
+        host: optional-nginx-service-name
+        port:
+          number: 80
