@@ -3,6 +3,7 @@
     {
       "kty": "oct",
       "kid":"HS256",
+      "use": "sig",
       "k": "YWxsLXNlY3JldA",
       "alg": "HS256"
     }
