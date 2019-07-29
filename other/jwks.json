@@ -2,6 +2,7 @@
   "keys": [
     {
       "kty": "oct",
+      "kid":"HS256",
       "k": "YWxsLXNlY3JldA",
       "alg": "HS256"
     }
