@@ -1,0 +1,20 @@
+//  gradle 5.5版本起appStartWar时grettyNoSpringBoot会报错
+apply from: 'https://rawcdn.githack.com/gretty-gradle-plugin/gretty/c58b07175fb911b77df8b4fb80e7007277cbfa83/pluginScripts/gretty-SNAPSHOT.plugin'
+//apply from: 'https://raw.github.com/gretty-gradle-plugin/gretty/master/pluginScripts/gretty-SNAPSHOT.plugin'
+//  https://gretty-gradle-plugin.github.io/gretty-doc/Gretty-configuration.html
+//  gradle appRunWar
+gretty {
+    servletContainer = 'jetty9.4'
+    httpPort = 8081 //  http://openle.test:8081/
+    
+    //  jetty-server-9.4.21.v20190926.jar、jetty-util-9.4.21.v20190926.jar、org.apache.taglibs.taglibs-standard-spec-1.2.5.jar
+    classPath = fileTree(dir: '../getty-library/', include: '*.jar').getFiles()
+}
+configurations.all.each { config->
+    //  避免下载无用的依赖
+    if(config.name.startsWith("grettyRunnerTomcat")||config.name.equals("grettyRunnerJetty7")
+        ||config.name.equals("grettyRunnerJetty8")||config.name.equals("grettyRunnerJetty9")
+        ||config.name.equals("grettyRunnerJetty93")){
+        config.exclude group: 'org.gretty'
+    }
+}
