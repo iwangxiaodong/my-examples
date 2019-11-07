@@ -1,14 +1,21 @@
-//  gradle 5.5版本起appStartWar时grettyNoSpringBoot会报错
-apply from: 'https://rawcdn.githack.com/gretty-gradle-plugin/gretty/c58b07175fb911b77df8b4fb80e7007277cbfa83/pluginScripts/gretty-SNAPSHOT.plugin'
+//   网络不稳可暂时离线编译 gradle war --offline
+apply from: 'https://rawcdn.githack.com/iwangxiaodong/gretty/bcfb7ec318e0613d0b66d9d03afa52a7d58876ea/pluginScripts/gretty-SNAPSHOT.plugin'
+//apply from: 'https://rawcdn.githack.com/gretty-gradle-plugin/gretty/c58b07175fb911b77df8b4fb80e7007277cbfa83/pluginScripts/gretty-SNAPSHOT.plugin'
 //apply from: 'https://raw.github.com/gretty-gradle-plugin/gretty/master/pluginScripts/gretty-SNAPSHOT.plugin'
 //  https://gretty-gradle-plugin.github.io/gretty-doc/Gretty-configuration.html
 //  gradle appRunWar
 gretty {
     servletContainer = 'jetty9.4'
-    httpPort = 8081 //  http://openle.test:8081/
-    
-    //  jetty-server-9.4.21.v20190926.jar、jetty-util-9.4.21.v20190926.jar、org.apache.taglibs.taglibs-standard-spec-1.2.5.jar
+    httpPort = 8080 //  http://openle.test:8081/
+    jvmArgs = [
+        "-Duser.timezone=Asia/Shanghai",
+        "-Dfile.encoding=UTF-8",
+    ]
     classPath = fileTree(dir: '../getty-library/', include: '*.jar').getFiles()
+    //    classPath = [
+    //            '../getty-library/javax.servlet.jsp.jstl-api-1.2.2.jar',   //  for ListController - servlet forward jsf page
+    //            '...'
+    //    ]
 }
 configurations.all.each { config->
     //  避免下载无用的依赖
