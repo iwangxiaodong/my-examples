@@ -25,3 +25,9 @@ configurations.all.each { config->
         config.exclude group: 'org.gretty'
     }
 }
+configurations {
+//    //  getty
+//    implementation.exclude module: 'javax.servlet-api'
+//    implementation.exclude group: 'jakarta.enterprise'
+//    implementation.exclude module: 'jakarta.el'
+}
