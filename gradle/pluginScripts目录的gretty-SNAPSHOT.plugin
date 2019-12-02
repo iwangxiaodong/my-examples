@@ -1,0 +1,36 @@
+buildscript {
+  repositories {
+    
+    project.ext.pwd = project.hasProperty('WEBDAV_PASSWORD') ? project.property('WEBDAV_PASSWORD') : System.getenv('WEBDAV_PASSWORD')
+
+    maven {
+        credentials {
+            username 'webdav'
+            password project.ext.pwd
+        }
+        url "https://maven.openle.com/releases/"
+    }
+    maven {
+        credentials {
+            username 'webdav'
+            password project.ext.pwd
+        }
+        url "https://maven.openle.com/snapshots/"
+    }
+    
+    jcenter()
+    maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local' }
+  }
+
+  dependencies {
+    classpath 'org.gretty:gretty:3.0.0-SNAPSHOT'
+  }
+}
+
+//repositories {
+//  jcenter()
+//  maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local' }
+//}
+
+if (!project.plugins.findPlugin(org.akhikhl.gretty.GrettyPlugin))
+  project.apply(plugin: org.akhikhl.gretty.GrettyPlugin)
